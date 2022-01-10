@@ -26,7 +26,6 @@ internal class FallDamagePatch
         LastGroundContactPoint = __instance.m_groundContactPoint;
         LastMaxAirAltitude = __instance.m_maxAirAltitude;
         GroundContact = __instance.m_groundContact;
-
     }
 
     [HarmonyPatch(typeof(Character), nameof(Character.UpdateGroundContact))]
