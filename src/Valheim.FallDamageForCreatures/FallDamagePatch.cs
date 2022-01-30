@@ -1,4 +1,6 @@
-﻿using HarmonyLib;
+﻿using System;
+using System.Collections.Generic;
+using HarmonyLib;
 using UnityEngine;
 
 namespace Valheim.FallDamageForCreatures;
@@ -6,6 +8,25 @@ namespace Valheim.FallDamageForCreatures;
 [HarmonyPatch]
 internal class FallDamagePatch
 {
+    private static HashSet<int> BlackListed { get; } = new();
+
+    static FallDamagePatch()
+    {
+        try
+        {
+            BlackListed = new()
+            {
+                "Blob".GetStableHashCode(),
+                "BlobElite".GetStableHashCode(),
+                "BlobTar".GetStableHashCode()
+            };
+        }
+        catch(Exception e)
+        {
+            Log.LogWarning("Failed to initialize list of creatures to not apply fall damage to.", e);
+        }
+    }
+
     private static Collider LastGroundContactCollider;
     private static Vector3 LastGroundContactNormal;
     private static Vector3 LastGroundContactPoint;
@@ -38,6 +59,13 @@ internal class FallDamagePatch
         }
 
         if (!GroundContact)
+        {
+            return;
+        }
+
+        int? prefabHash = __instance.m_nview?.GetZDO()?.m_prefab;
+        if (prefabHash is not null &&
+            BlackListed.Contains(prefabHash.Value))
         {
             return;
         }
