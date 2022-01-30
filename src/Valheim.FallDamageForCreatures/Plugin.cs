@@ -3,7 +3,7 @@ using HarmonyLib;
 
 namespace Valheim.FallDamageForCreatures;
 
-[BepInPlugin("fall_damage_for_creatures", "Fall Damage For Creatures", "1.0.0")]
+[BepInPlugin("fall_damage_for_creatures", "Fall Damage For Creatures", "1.1.0")]
 public class Plugin : BaseUnityPlugin
 {
     void Awake()

@@ -1,9 +1,9 @@
 {
   "name": "Fall_Damage_For_Creatures",
-  "version_number": "0.0.0",
+  "version_number": "1.1.0",
   "website_url": "https://github.com/ASharpPen/Valheim.FallDamageForCreatures",
   "description": "Enables fall damage for creatures.",
   "dependencies": [
-    "denikson-BepInExPack_Valheim-5.4.602"
+    "denikson-BepInExPack_Valheim-5.4.1700"
   ]
 }
